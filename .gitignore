@@ -15,4 +15,3 @@ web-build/
 
 # Enviroment variables
 .env
-env.json

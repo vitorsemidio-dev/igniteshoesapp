@@ -7,7 +7,7 @@ import { NativeBaseProvider } from 'native-base';
 import { StatusBar } from 'react-native';
 import OneSignal from 'react-native-onesignal';
 
-import { ONE_SIGNAL_APP_ID } from './env.json';
+import { ONE_SIGNAL_APP_ID } from '@env';
 import { Loading } from './src/components/Loading';
 import { CartContextProvider } from './src/contexts/CartContext';
 import { Routes } from './src/routes';
