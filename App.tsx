@@ -15,6 +15,12 @@ import { THEME } from './src/theme';
 
 OneSignal.setAppId(ONE_SIGNAL_APP_ID);
 
+OneSignal.setEmail('test@onesignal.com');
+
+OneSignal.promptForPushNotificationsWithUserResponse((response) => {
+  console.log('Prompt response:', response);
+});
+
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
