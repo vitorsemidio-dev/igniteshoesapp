@@ -35,7 +35,14 @@ export default function App() {
 
   useEffect(() => {
     const unsubscribe = OneSignal.setNotificationOpenedHandler((event) => {
-      console.log('Notificação aberta');
+      const { actionId } = event.action as any;
+      const actions: { [key: string]: () => void } = {
+        '1': () => console.log('Ver todas'),
+        '2': () => console.log('Ver pedidos'),
+      };
+      const defaultAction = () => console.log('Notificação aberta');
+      const action = actions[actionId] || defaultAction;
+      action();
     });
 
     return () => unsubscribe;
