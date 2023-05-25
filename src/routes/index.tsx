@@ -27,6 +27,8 @@ export function Routes() {
         setNotification(response);
       },
     );
+
+    return () => unsubscribed;
   }, []);
 
   return (

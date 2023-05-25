@@ -33,6 +33,14 @@ export default function App() {
     createTagUserInfo();
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = OneSignal.setNotificationOpenedHandler((event) => {
+      console.log('Notificação aberta');
+    });
+
+    return () => unsubscribe;
+  }, []);
+
   return (
     <NativeBaseProvider theme={THEME}>
       <StatusBar
