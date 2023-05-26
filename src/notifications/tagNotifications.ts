@@ -14,3 +14,7 @@ export function createTagUserInfo() {
     user_email: 'johndoe@email.com',
   });
 }
+
+export function updateCartItemsCount(count: number) {
+  OneSignal.sendTag('cart_items_count', count.toString());
+}

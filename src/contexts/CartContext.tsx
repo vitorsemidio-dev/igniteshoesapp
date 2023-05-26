@@ -1,23 +1,26 @@
-import { createContext, useState, ReactNode, useEffect } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 
+import { updateCartItemsCount } from '../notifications/tagNotifications';
 import {
   StorageCartProps,
-  storageProductSave,
-  storageProductRemove,
   storageProductGetAll,
+  storageProductRemove,
+  storageProductSave,
 } from '../storage/storageCart';
 
 export type CartContextDataProps = {
   addProductCart: (newProduct: StorageCartProps) => Promise<void>;
   removeProductCart: (productId: string) => Promise<void>;
   cart: StorageCartProps[];
-}
+};
 
 type CartContextProviderProps = {
   children: ReactNode;
-}
+};
 
-export const CartContext = createContext<CartContextDataProps>({} as CartContextDataProps);
+export const CartContext = createContext<CartContextDataProps>(
+  {} as CartContextDataProps,
+);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cart, setCart] = useState<StorageCartProps[]>([]);
@@ -42,17 +45,23 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   useEffect(() => {
     storageProductGetAll()
-      .then(products => setCart(products))
-      .catch(error => console.log(error));
+      .then((products) => setCart(products))
+      .catch((error) => console.log(error));
   }, []);
 
+  useEffect(() => {
+    updateCartItemsCount(cart.length);
+  }, [cart]);
+
   return (
-    <CartContext.Provider value={{
-      cart,
-      addProductCart,
-      removeProductCart,
-    }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addProductCart,
+        removeProductCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
-  )
+  );
 }

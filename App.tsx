@@ -11,7 +11,6 @@ import { ONE_SIGNAL_APP_ID } from '@env';
 import { useEffect } from 'react';
 import { Loading } from './src/components/Loading';
 import { CartContextProvider } from './src/contexts/CartContext';
-import { createTagUserInfo } from './src/notifications/tagNotifications';
 import { Routes } from './src/routes';
 import { THEME } from './src/theme';
 
@@ -26,12 +25,6 @@ OneSignal.promptForPushNotificationsWithUserResponse((response) => {
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
-
-  useEffect(() => {
-    // createTagUserEmail(USER_EMAIL);
-    // deleteTag('email');
-    createTagUserInfo();
-  }, []);
 
   useEffect(() => {
     const unsubscribe = OneSignal.setNotificationOpenedHandler((event) => {
