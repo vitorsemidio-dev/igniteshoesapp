@@ -1,10 +1,10 @@
+import { IPressableProps, Image, Pressable } from 'native-base';
 import { ImageSourcePropType, Platform } from 'react-native';
-import { Pressable, IPressableProps, Image } from 'native-base';
 
 type Props = IPressableProps & {
   image: ImageSourcePropType;
   isActive: boolean;
-}
+};
 
 export function Brand({ image, isActive, ...rest }: Props) {
   return (
@@ -19,8 +19,8 @@ export function Brand({ image, isActive, ...rest }: Props) {
       overflow="hidden"
       isPressed={isActive}
       _pressed={{
-        borderColor: "green.500",
-        borderWidth: 1
+        borderColor: 'green.500',
+        borderWidth: 1,
       }}
       {...rest}
     >
@@ -29,7 +29,7 @@ export function Brand({ image, isActive, ...rest }: Props) {
         alt="Brand image"
         w={20}
         h={7}
-        resizeMode={Platform.OS === "android" ? "contain" : "cover"}
+        resizeMode={Platform.OS === 'android' ? 'contain' : 'cover'}
       />
     </Pressable>
   );

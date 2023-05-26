@@ -1,19 +1,18 @@
 import { FlatList } from 'native-base';
 
-import { Brand } from './Brand';
 import { BRANDS } from '../data/brands';
+import { Brand } from './Brand';
 
 type Props = {
   onSelect: (value: string) => void;
   selected: string;
-}
+};
 
 export function Brands({ onSelect, selected }: Props) {
-
   return (
     <FlatList
       data={BRANDS}
-      keyExtractor={item => item.id}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <Brand
           image={item.image}
