@@ -3,6 +3,7 @@ import { ReactNode, createContext, useEffect, useState } from 'react';
 import { updateCartItemsCount } from '../notifications/tagNotifications';
 import {
   StorageCartProps,
+  storageClear,
   storageProductGetAll,
   storageProductRemove,
   storageProductSave,
@@ -11,6 +12,7 @@ import {
 export type CartContextDataProps = {
   addProductCart: (newProduct: StorageCartProps) => Promise<void>;
   removeProductCart: (productId: string) => Promise<void>;
+  finishPurchase: () => Promise<void>;
   cart: StorageCartProps[];
 };
 
@@ -43,6 +45,15 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
   }
 
+  async function finishPurchase() {
+    try {
+      await storageClear();
+      setCart([]);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   useEffect(() => {
     storageProductGetAll()
       .then((products) => setCart(products))
@@ -59,6 +70,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         cart,
         addProductCart,
         removeProductCart,
+        finishPurchase,
       }}
     >
       {children}
